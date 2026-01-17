@@ -28,7 +28,7 @@ class Group:
 
 
 def write_groups_information(groups: list[Group]) -> int:
-    with open(file="groups.pickle", mode="b") as file:
+    with open(file="groups.pickle", mode="wb") as file:
         pickle.dump(groups, file)
 
     nb_students = len([student for group in groups
@@ -37,7 +37,7 @@ def write_groups_information(groups: list[Group]) -> int:
 
 
 def write_students_information(students: list[Student]) -> int:
-    with open(file="students.pickle", mode="b") as file:
+    with open(file="students.pickle", mode="wb") as file:
         pickle.dump(students, file)
 
     return len(students)
@@ -65,7 +65,7 @@ def read_students_information() -> list[Student]:
 
 
 def _load_pickle_file(file_name: str) -> object:
-    with open(file=file_name, mode="b") as file:
+    with open(file=file_name, mode="rb") as file:
         while True:
             try:
                 yield pickle.load(file)
