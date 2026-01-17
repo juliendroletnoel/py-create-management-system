@@ -27,9 +27,8 @@ class Group:
     students: list[Student]
 
 
-def write_groups_information(groups: list[Group],
-                             file_name="groups.pickle") -> int:
-    with open(file=file_name, mode="b") as file:
+def write_groups_information(groups: list[Group]) -> int:
+    with open(file="groups.pickle", mode="b") as file:
         pickle.dump(groups, file)
 
     nb_students = len([student for group in groups
@@ -37,19 +36,18 @@ def write_groups_information(groups: list[Group],
     return nb_students
 
 
-def write_students_information(students: list[Student], 
-                               file_name="students.pickle") -> int:
-    with open(file=file_name, mode="b") as file:
+def write_students_information(students: list[Student]) -> int:
+    with open(file="students.pickle", mode="b") as file:
         pickle.dump(students, file)
 
     return len(students)
 
 
-def read_groups_information(file_name="groups.pickle") -> list[Specialty]:
+def read_groups_information() -> list[Specialty]:
 
     groups = []
 
-    groups.append(_load_pickle_file(file_name=file_name))
+    groups.append(_load_pickle_file(file_name="groups.pickle"))
 
     specialties = set([speciality for group in groups for
                        speciality in group.speciality])
@@ -57,11 +55,11 @@ def read_groups_information(file_name="groups.pickle") -> list[Specialty]:
     return list(specialties)
 
 
-def read_students_information(file_name="students.pickle") -> list[Student]:
+def read_students_information() -> list[Student]:
 
     students = []
 
-    students.append(_load_pickle_file(file_name=file_name))
+    students.append(_load_pickle_file(file_name="students.pickle"))
 
     return students
 
