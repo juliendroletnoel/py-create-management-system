@@ -28,17 +28,19 @@ class Group:
 
 
 def write_groups_information(groups: list[Group]) -> int:
+    nb_students = []
     with open(file="groups.pickle", mode="wb") as file:
-        pickle.dump(groups, file)
+        for group in groups:
+            pickle.dump(group, file)
+            nb_students.append(len(group.students))
 
-    nb_students = len([student for group in groups
-                       for student in group.students])
-    return nb_students
+    return max(nb_students)
 
 
 def write_students_information(students: list[Student]) -> int:
     with open(file="students.pickle", mode="wb") as file:
-        pickle.dump(students, file)
+        for student in students:
+            pickle.dump(student, file)
 
     return len(students)
 
