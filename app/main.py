@@ -58,7 +58,7 @@ def read_groups_information() -> list[Specialty]:
             except EOFError:
                 break
 
-    specialties = list(set([group.speciality for group in groups]))
+    specialties = list(set([group.specialty for group in groups]))
 
     return list(specialties)
 
