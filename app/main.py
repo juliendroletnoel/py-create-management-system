@@ -29,7 +29,7 @@ class Group:
 
 def write_groups_information(groups: list[Group]) -> int:
     nb_students = []
-    with open(file="groups.pickle", mode="wb") as file:
+    with open("groups.pickle", "wb") as file:
         for group in groups:
             pickle.dump(group, file)
             nb_students.append(len(group.students))
@@ -41,7 +41,7 @@ def write_groups_information(groups: list[Group]) -> int:
 
 
 def write_students_information(students: list[Student]) -> int:
-    with open(file="students.pickle", mode="wb") as file:
+    with open("students.pickle", "wb") as file:
         for student in students:
             pickle.dump(student, file)
 
@@ -51,14 +51,15 @@ def write_students_information(students: list[Student]) -> int:
 def read_groups_information() -> list[Specialty]:
 
     groups = []
-    with open(file="groups.pickle", mode="rb") as file:
+    with open("groups.pickle", "rb") as file:
         while True:
             try:
                 groups.append(pickle.load(file))
             except EOFError:
                 break
 
-    specialties = list(set([group.specialty for group in groups]))
+    specialties = list(set([group.specialty.name
+                            for group in groups]))
 
     return list(specialties)
 
@@ -66,7 +67,7 @@ def read_groups_information() -> list[Specialty]:
 def read_students_information() -> list[Student]:
 
     students = []
-    with open(file="students.pickle", mode="rb") as file:
+    with open("students.pickle", "rb") as file:
         while True:
             try:
                 students.append(pickle.load(file))
