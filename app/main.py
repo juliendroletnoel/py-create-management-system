@@ -34,8 +34,10 @@ def write_groups_information(groups: list[Group]) -> int:
             pickle.dump(group, file)
             nb_students.append(len(group.students))
 
-    return max(nb_students)
-
+    try:
+        return max(nb_students)
+    except ValueError:
+        return 0
 
 def write_students_information(students: list[Student]) -> int:
     with open(file="students.pickle", mode="wb") as file:
@@ -56,7 +58,7 @@ def read_groups_information() -> list[Specialty]:
                 break
 
     specialties = set([speciality for group in groups for
-                       speciality in group.speciality])
+                       speciality in group.specialty])
 
     return list(specialties)
 
