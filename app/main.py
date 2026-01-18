@@ -39,6 +39,7 @@ def write_groups_information(groups: list[Group]) -> int:
     except ValueError:
         return 0
 
+
 def write_students_information(students: list[Student]) -> int:
     with open(file="students.pickle", mode="wb") as file:
         for student in students:
