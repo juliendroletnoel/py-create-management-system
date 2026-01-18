@@ -48,8 +48,12 @@ def write_students_information(students: list[Student]) -> int:
 def read_groups_information() -> list[Specialty]:
 
     groups = []
-
-    groups.append(_load_pickle_file(file_name="groups.pickle"))
+    with open(file="groups.pickle", mode="rb") as file:
+        while True:
+            try:
+                groups.append(pickle.load(file))
+            except EOFError:
+                break
 
     specialties = set([speciality for group in groups for
                        speciality in group.speciality])
@@ -60,16 +64,11 @@ def read_groups_information() -> list[Specialty]:
 def read_students_information() -> list[Student]:
 
     students = []
-
-    students.append(_load_pickle_file(file_name="students.pickle"))
-
-    return students
-
-
-def _load_pickle_file(file_name: str) -> object:
-    with open(file=file_name, mode="rb") as file:
+    with open(file="students.pickle", mode="rb") as file:
         while True:
             try:
-                yield pickle.load(file)
+                students.append(pickle.load(file))
             except EOFError:
                 break
+
+    return students
